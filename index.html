@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPA Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>GPA Calculator</h1>
+    <form id="gpaForm">
+        <h2>Grade A (Multiplier 2)</h2>
+        <input type="number" id="gradeA" step="0.1" required>
+
+        <h2>Grade B (Multiplier 1.5)</h2>
+        <input type="number" id="gradeB1" step="0.1" required>
+        <input type="number" id="gradeB2" step="0.1" required>
+        <input type="number" id="gradeB3" step="0.1" required>
+
+        <h2>Grade C (Multiplier 1)</h2>
+        <input type="number" id="gradeC1" step="0.1" required>
+        <input type="number" id="gradeC2" step="0.1" required>
+        <input type="number" id="gradeC3" step="0.1" required>
+        <input type="number" id="gradeC4" step="0.1" required>
+        <input type="number" id="gradeC5" step="0.1" required>
+
+        <h2>Grade D (Multiplier 0.5)</h2>
+        <input type="number" id="gradeD1" step="0.1" required>
+        <input type="number" id="gradeD2" step="0.1" required>
+        <input type="number" id="gradeD3" step="0.1" required>
+        <input type="number" id="gradeD4" step="0.1" required>
+
+        <button type="submit">Calculate GPA</button>
+    </form>
+
+    <h2 id="result"></h2>
+
+    <script>
+        const gradeX = 13.5;
+
+        document.getElementById('gpaForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            let gradeA = parseFloat(document.getElementById('gradeA').value);
+            let total = 0;
+            let MultiplierA = 2;
+
+            total += MultiplierA * gradeA;
+
+            let gradeB = 0;
+            for (let i = 1; i <= 3; i++) {
+                gradeB += parseFloat(document.getElementById('gradeB' + i).value);
+            }
+            total += gradeB * 1.5;
+
+            let gradeC = 0;
+            for (let i = 1; i <= 5; i++) {
+                gradeC += parseFloat(document.getElementById('gradeC' + i).value);
+            }
+            total += gradeC * 1.0;
+
+            let gradeD = 0;
+            for (let i = 1; i <= 4; i++) {
+                gradeD += parseFloat(document.getElementById('gradeD' + i).value);
+            }
+            total += gradeD * 0.5;
+
+            let GPA = total / gradeX;
+
+            document.getElementById('result').innerText = "GPA : " + GPA.toFixed(2);
+        });
+    </script>
+</body>
+</html>
